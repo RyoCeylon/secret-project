@@ -1,0 +1,38 @@
+DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>SECRET ENTRANCE</title>
+  <style>
+    body { font-family: sans-serif; margin: 50px; }
+    .container { max-width: 400px; margin: 0 auto; text-align: center; }
+    input[type="password"] { width: 80%; padding: 8px; }
+    button { margin-top: 10px; padding: 8px 16px; }
+  </style>
+  <!-- ここで検索エンジンからのクロールを避ける設定 -->
+  <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+<div class="container">
+  <h1>Welcome</h1>
+  <p>Enter the secret password:</p>
+  <input type="password" id="passField" />
+  <br />
+  <button onclick="checkPassword()">Enter</button>
+</div>
+
+<script>
+function checkPassword() {
+  // ここをふたりだけのパスワードに変更
+  const correctPassword = "abcd1234"; 
+  
+  const entered = document.getElementById('passField').value;
+  if (entered === correctPassword) {
+    window.location.href = "secret.html"; 
+  } else {
+    alert("パスワードが違います");
+  }
+}
+</script>
+</body>
+</html>
