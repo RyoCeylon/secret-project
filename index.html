@@ -1,38 +1,165 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <title>SECRET ENTRANCE</title>
-  <style>
-    body { font-family: sans-serif; margin: 50px; }
-    .container { max-width: 400px; margin: 0 auto; text-align: center; }
-    input[type="password"] { width: 80%; padding: 8px; }
-    button { margin-top: 10px; padding: 8px 16px; }
-  </style>
-  <!-- ここで検索エンジンからのクロールを避ける設定 -->
+  <meta charset="UTF-8">
+  <title>秘密の入口</title>
+  <!-- ビューポート設定（スマホ対応） -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 検索エンジン回避用メタタグ -->
   <meta name="robots" content="noindex, nofollow">
-</head>
-<body>
-<div class="container">
-  <h1>Welcome</h1>
-  <p>Enter the secret password:</p>
-  <input type="password" id="passField" />
-  <br />
-  <button onclick="checkPassword()">Enter</button>
-</div>
 
-<script>
-function checkPassword() {
-  // ここをふたりだけのパスワードに変更
-  const correctPassword = "abcd1234"; 
-  
-  const entered = document.getElementById('passField').value;
-  if (entered === correctPassword) {
-    window.location.href = "secret.html"; 
-  } else {
-    alert("パスワードが違います");
-  }
-}
-</script>
+  <!-- Google Fonts: Noto Sans JP（日本語対応） -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" 
+    rel="stylesheet"
+  >
+
+  <style>
+    /* 
+      基本リセット
+      横スクロール防止のため、html/body全体で overflow-x を hidden に 
+    */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    /* 背景画像を画面全体に表示。スクロールしても固定 */
+    body {
+      display: flex;                  /* コンテナを中央に配置 */
+      justify-content: center;
+      align-items: center;
+      background: url('my_background.jpg') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed;   /* PCでの背景固定 */
+      /* スマホブラウザなど、一部対応していない場合もあり */
+    }
+
+    /* 中央に置く白っぽいボックス */
+    .container {
+      width: 90%;
+      max-width: 400px;
+      background-color: rgba(255,255,255,0.85);
+      border-radius: 20px;           /* 角を丸める */
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      padding: 40px;
+      text-align: center;
+      /* ふわっと現れるアニメーション */
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInMove 0.8s forwards ease;
+    }
+
+    /* フェードイン + 下から上への移動 */
+    @keyframes fadeInMove {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* タイトル */
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #333;
+      font-weight: 700;
+    }
+
+    /* 説明テキスト */
+    p {
+      margin-bottom: 20px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* ラベル */
+    label {
+      display: block;
+      text-align: left;
+      color: #555;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    /* パスワード入力欄 */
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      outline: none;
+      transition: border 0.2s ease;
+    }
+    input[type="password"]:focus {
+      border-color: #666;
+    }
+
+    /* ボタン */
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 6px;
+      background-color: #007BFF;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+
+    /* スマホ用微調整 */
+    @media screen and (max-width: 480px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+      .container {
+        padding: 30px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>秘密の入口</h1>
+    <p>こちらは秘密のページへ進むための入口です。<br>
+       パスワードを入力して「入る」ボタンを押してください。</p>
+
+    <label for="passwordInput">パスワード</label>
+    <input type="password" id="passwordInput" placeholder="パスワードを入力" />
+
+    <button id="enterBtn">入る</button>
+  </div>
+
+  <script>
+    // ボタンを押したらパスワード判定 → secret.htmlへ
+    const enterBtn = document.getElementById('enterBtn');
+    enterBtn.addEventListener('click', () => {
+      const correctPassword = "1220";   // 実際のパスワードを設定
+      const entered = document.getElementById('passwordInput').value;
+
+      if (entered === correctPassword) {
+        window.location.href = "secret.html"; 
+      } else {
+        alert("パスワードが違います");
+      }
+    });
+  </script>
 </body>
 </html>
